@@ -12,6 +12,6 @@
   "require": {
     "php": ">= 7.3.0",
     "lobster-php/reducible": "^1.0",
-    "lobster-php/countable": "^1.0",
+    "lobster-php/countable": "^1.0"
   }
 }
