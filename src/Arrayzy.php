@@ -35,6 +35,22 @@ class Arrayzy implements Enumerable {
     public function set($offset, $value) : Enumerable {
         return $this->offsetSet($offset, $value);
     }
+    
+    /**
+     * @param int|string $offset
+     * @param mixed $value
+     * @return static
+     */
+    public function offsetSet($offset, $value): Enumerable {
+
+        if(is_array($value)){
+            $value = $this->newStatic($value);
+        }
+
+        $offset === null ? $this->data[] = $value : $this->data[$offset] = $value;
+
+        return $this;
+    }
 
     /**
      * @param callable $callable
