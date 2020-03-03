@@ -28,7 +28,7 @@ class Arrayzy implements Enumerable {
     }
     
     /**
-     * @param bool $recrsive
+     * @param bool $recursive
      * @return int
      */
     public function count(bool $recursive = false) : int {
@@ -39,7 +39,7 @@ class Arrayzy implements Enumerable {
            
            foreach($this->data as $datum){
                
-               if($this->isStatic($datum){
+               if($this->isStatic($datum)){
                    $count += $datum->count(true);
                }
                
