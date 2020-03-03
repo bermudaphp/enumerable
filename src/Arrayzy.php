@@ -127,12 +127,12 @@ class Arrayzy implements Enumerable {
     /**
      * @param array $values
      * @return static
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function combine(array $values) : Enumerable {
 
         if($this->count() !== count($values)){
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The number of elements in the array must 
                 be equal to the number of elements in the collection'
             );
