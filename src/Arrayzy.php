@@ -10,7 +10,7 @@ namespace Lobster\Arrayzy;
  */
 class Arrayzy implements Enumerable {
 
-    use Accessible, Countable;
+    use Accessible;
 
     /**
      * @return \Traversable
@@ -23,8 +23,33 @@ class Arrayzy implements Enumerable {
      * @param $var
      * @return bool
      */
-    public function isStatic($var) : bool {
+    protected function isStatic($var) : bool {
         return $var instanceof static;
+    }
+    
+    /**
+     * @param bool $recrsive
+     * @return int
+     */
+    public function count(bool $recursive = false) : int {
+       
+        if($recursive){
+           
+           $count = 0;
+           
+           foreach($this->data as $datum){
+               
+               if($this->isStatic($datum){
+                   $count += $datum->count(true);
+               }
+               
+               else {
+                   $count += 1;
+               }
+           }
+        }
+       
+        return count($this->data);
     }
 
     /**
