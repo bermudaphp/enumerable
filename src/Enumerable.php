@@ -103,6 +103,13 @@ interface Enumerable extends Arrayble, Countable, \ArrayAccess, \IteratorAggrega
      * @return array
      */
     public function searchAll(callable $callback): array;
+    
+    /**
+     * @param string|int|null $offset
+     * @param $value
+     * @return static
+     */
+    public function set($offset, $value) : Enumerable ;
 
     /**
      * @param string|int $offset
@@ -334,9 +341,9 @@ interface Enumerable extends Arrayble, Countable, \ArrayAccess, \IteratorAggrega
     /**
      * @param int|string $offset
      * @param mixed $value
-     * @throws InvalidArgumentException
+     * @return static
      */
-    public function offsetSet($offset, $value);
+    public function offsetSet($offset, $value) : Enumerable ;
 
     /**
      * @param array $data
