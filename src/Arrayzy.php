@@ -10,7 +10,7 @@ namespace Lobster\Arrayzy;
  */
 class Arrayzy implements Enumerable {
 
-    use Accessible, CountableTrait;
+    use Accessible, Countable;
 
     /**
      * @return \Traversable
