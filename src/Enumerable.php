@@ -50,6 +50,11 @@ interface Enumerable extends Arrayble, Countable, \ArrayAccess, \IteratorAggrega
      * @return static
      */
     public function take($limit): Enumerable;
+    
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool;
 
     /**
      * @return static
