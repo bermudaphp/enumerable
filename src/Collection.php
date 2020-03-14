@@ -28,7 +28,7 @@ abstract class Collection extends Arrayzy {
      * @return static
      * @throws \InvalidArgumentException
      */
-    public function offsetSet($offset, $value) {
+    public function function offsetSet($offset, $value) : Enumerable {
 
         if($this->is($value)){
             return parent::offsetSet($offset, $value);
