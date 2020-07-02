@@ -96,5 +96,4 @@ trait Accessible
     {
         return new static($arguments[0]);
     }
-
 }
