@@ -11,7 +11,7 @@ use Bermuda\Countable\Countable;
  * Interface EnumerableInterface
  * @package Bermuda\Enumerable
  */
-interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \IteratorAggregate
+interface EnumerableInterface extends Arrayable, Countable, \ArrayAccess, \IteratorAggregate
 {
     /**
      * @param callable $callback
