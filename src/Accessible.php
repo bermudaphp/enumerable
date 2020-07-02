@@ -54,7 +54,7 @@ trait Accessible
             return $value;
         }
 
-        return $this->data[$offset];
+        return $this->items[$offset];
     }
 
     /**
