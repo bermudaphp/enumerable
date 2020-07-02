@@ -5,10 +5,10 @@ namespace Bermuda\Enumerable;
 
 
 /**
- * Interface Arrayble
+ * Interface Arrayable
  * @package Bermuda\Enumerable
  */
-interface Arrayble
+interface Arrayable
 {
     /**
      * @return array
