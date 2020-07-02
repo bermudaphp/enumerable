@@ -1,18 +1,17 @@
 {
-  "name": "lobster-php/arrayzy",
+  "name": "bermudaphp/enumerable",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Lobster\\Arrayzy\\": "src/"
+      "Bermuda\\Enumerable\\": "src/"
     },
     "files": [
               "src/functions.php"
     ]
   },
   "require": {
-    "php": ">= 7.3.0",
-    "lobster-php/reducible": "^1.0",
-    "lobster-php/countable": "^1.0",
+    "php": ">= 7.4",
+    "bermudaphp/countable": "^1.0",
     "symfony/var-dumper": "^5.0"
   }
 }
