@@ -64,7 +64,7 @@ trait Accessible
      */
     public function offsetSet($offset, $value)
     {
-        if(is_iterable($value))
+        if(is_array($value))
         {
             $value = $this->newStatic($value);
         }
