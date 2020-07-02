@@ -1,20 +1,20 @@
 <?php
 
 
-namespace Lobster\Arrayzy;
+namespace Bermuda\Enumerable;
 
 
 /**
  * Class Collection
- * @package Lobster\Arrayzy
+ * @package Bermuda\Enumerable
  */
-abstract class Collection extends Arrayzy {
-
+abstract class Collection extends Enumerable
+{
     /**
      * @param $var
      * @return bool
      */
-    abstract public function is($var) : bool ;
+    abstract public function is($var): bool ;
 
     /**
      * @param $value
@@ -28,9 +28,10 @@ abstract class Collection extends Arrayzy {
      * @return static
      * @throws \InvalidArgumentException
      */
-    public function offsetSet($offset, $value) : Enumerable {
-
-        if($this->is($value)){
+    public function offsetSet($offset, $value) : EnumerableInterface
+    {
+        if($this->is($value))
+        {
             return parent::offsetSet($offset, $value);
         }
 
