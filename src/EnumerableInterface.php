@@ -14,13 +14,13 @@ use Bermuda\Countable\Countable;
 interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \IteratorAggregate
 {
     /**
-     * @param callable $callable
-     * @return static
+     * @param callable $callback
+     * @return EnumerableInterface
      */
-    public function map(callable $callable): EnumerableInterface ;
+    public function map(callable $callback): EnumerableInterface ;
 
     /**
-     * @return static
+     * @return EnumerableInterface
      */
     public function collapse(): EnumerableInterface ;
 
@@ -33,20 +33,20 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
      * @param Arrayable|array $first
      * @param Arrayable|array ... $other
      * @throws InvalidArhumentException
-     * @return static
+     * @return EnumerableInterface
      */
     public function diff($first, ... $other): EnumerableIneterface ;
 
     /**
      * @param Arrayable|array $values
-     * @return static
      * @throws InvalidArgumentException
+     * @return EnumerableInterface
      */
     public function combine($values): EnumerableInterface ;
 
     /**
      * @param int $limit
-     * @return static
+     * @return EnumerableInterface
      */
     public function take(int $limit): EnumerableInterface ;
     
@@ -56,7 +56,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
     public function isEmpty(): bool;
 
     /**
-     * @return static
+     * @return EnumerableInterface
      */
     public function flip(): EnumerableInterface ;
 
@@ -80,7 +80,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
 
     /**
      * @param callable $callback
-     * @return static
+     * @return EnumerableInterface
      */
     public function reject(callable $callback): EnumerableInterface ;
 
@@ -104,14 +104,14 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
 
     /**
      * @param callable $callback
-     * @return array
+     * @return EnumerableInterface
      */
     public function searchAll(callable $callback): EnumerableInterface ;
     
     /**
      * @param string|int|null $offset
      * @param $value
-     * @return static
+     * @return EnumerableInterface
      */
     public function set($offset, $value): EnumerableInterface ;
 
@@ -130,7 +130,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
 
     /**
      * @param $offset
-     * @return static
+     * @return EnumerableInterface
      */
     public function remove($offset): EnumerableInterface ;
 
@@ -147,7 +147,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
     /**
      * @param int $size
      * @param bool $preserveKeys
-     * @return static
+     * @return EnumerableInterface
      */
     public function chunk(int $size, bool $preserveKeys = false): EnumerableInterface ;
 
@@ -159,43 +159,43 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
 
     /**
      * @param int $sort_flags
-     * @return static
+     * @return EnumerableInterface
      */
     public function sort(int $sort_flags = SORT_REGULAR): EnumerableInterface;
 
     /**
      * @param int $sort_flags
-     * @return static
+     * @return EnumerableInterface
      */
     public function ksort(int $sort_flags = SORT_REGULAR): EnumerableInterface ;
 
     /**
      * @param int $sort_flags
-     * @return static
+     * @return EnumerableInterface
      */
     public function krsort(int $sort_flags = SORT_REGULAR): EnumerableInterface ;
 
     /**
      * @param callable $callback
-     * @return static
+     * @return EnumerableInterface
      */
     public function usort(callable $callback): EnumerableInterface ;
 
     /**
      * @param callable $callback
-     * @return static
+     * @return EnumerableInterface
      */
     public function uasort(callable $callback): EnumerableInterface ;
 
     /**
      * @param callable $callback
-     * @return static
+     * @return EnumerableInterface
      */
     public function uksort(callable $callback): EnumerableInterface ;
 
     /**
      * @param int $sort_flags
-     * @return static
+     * @return EnumerableInterface
      */
     public function rsort(int $sort_flags = SORT_REGULAR): EnumerableInterface ;
 
@@ -216,7 +216,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
 
     /**
      * @param callable $callback
-     * @return static
+     * @return EnumerableInterface
      */
     public function filter(callable $callback): EnumerableInterface ;
 
@@ -241,12 +241,12 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
 
     /**
      * @param int $sort_flags
-     * @return static
+     * @return EnumerableInterface
      */
     public function unique(int $sort_flags = SORT_STRING): EnumerableInterface ;
 
     /**
-     * @return array
+     * @return EnumerableInterface
      */
     public function values(): EnumerableInterface ;
 
@@ -257,7 +257,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
 
     /**
      * Shuffles the array randomly
-     * @return static
+     * @return EnumerableInterface
      */
     public function shuffle(): EnumerableInterface ;
 
@@ -265,30 +265,30 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
      * @param int $offset
      * @param int|null $len
      * @param bool $preserveKeys
-     * @return static
+     * @return EnumerableInterface
      */
     public function slice(int $offset, int $len = null, bool $preserveKeys = false): EnumerableInterface ;
 
     /**
      * @param bool $preserveKeys
-     * @return static
+     * @return EnumerableInterface
      */
     public function reverse($preserveKeys = false): EnumerableInterface ;
 
     /**
      * @param mixed ...$values
-     * @return Enumerable
+     * @return EnumerableInterface
      */
     public function add(... $values): EnumerableInterface ;
 
     /**
-     * @return static
+     * @return EnumerableInterface
      */
     public function clear(): EnumerableInterface ;
 
     /**
      * @param array|Arrayable $items
-     * @return static
+     * @return EnumerableInterface
      */
     public function replace($items): EnumerableInterface ;
 
@@ -301,7 +301,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
     /**
      * @param string|int|array $offset
      * @param string|int ...$offsets
-     * @return static
+     * @return EnumerableInterface
      */
     public function only($offset, ... $offsets): EnumerableInterface ;
 
@@ -318,8 +318,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
     public function end();
 
     /**
-     * Return array of collection keys
-     * @return array
+     * @return EnumerableInterface
      */
     public function keys(): EnumerableInterface ;
 
@@ -338,34 +337,34 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
     /**
      * @param string|int|array $offset
      * @param string|int ...$offsets
-     * @return static
+     * @return EnumerableInterface
      */
     public function except($offset, ...$offsets): EnumerableInterface ;
 
     /**
      * @param int|string $offset
      * @param mixed $value
-     * @return static
+     * @return EnumerableInterface
      */
     public function offsetSet($offset, $value): EnumerableInterface ;
 
     /**
      * @param array|Arrayable $first
      * @param array|Arrayable ... $other
-     * @return static
+     * @return EnumerableInterface
      */
     public function merge($first, ... $other): EnumerableInterface ;
 
     /**
      * @param callable $callback
-     * @return static
+     * @return EnumerableInterface
      */
     public function each(callable $callback): EnumerableInterface ;
 
     /**
      * @param string|int $key
      * @param null|string|int $indexKey
-     * @return static
+     * @return EnumerableInterface
      */
     public function pluck($key, $indexKey = null): EnumerableInterface ;
 
@@ -378,7 +377,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
     /**
      * @param array|Arrayable $first
      * @param array|Arrayable ... $other
-     * @return static
+     * @return EnumerableInterface
      */
     public function intersect($first, ... $other): EnumerableInterface ;
 
@@ -390,7 +389,7 @@ interface EnumerableInterface extends Arrayble, Countable, \ArrayAccess, \Iterat
 
     /**
      * @param int $num
-     * @return static
+     * @return EnumerableInterface
      */
     public function split(int $num): EnumerableInterface;
 
