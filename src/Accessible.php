@@ -1,26 +1,21 @@
 <?php
 
 
-namespace Lobster\Arrayzy;
+namespace Bermuda\Enumerable;
 
 
 /**
  * Trait Accessible
- * @package Lobster\Arrayzy
+ * @package Bermuda\Enumerable
  */
-trait Accessible {
+trait Accessible
+{
+    protected $items = [];
 
-    /**
-     * @var array
-     */
-    protected $data = [];
-
-    /**
-     * Accessible constructor.
-     * @param iterable $data
-     */
-    public function __construct(iterable $data = []) {
-        foreach ($data as $offset => $value){
+    public function __construct(iterable $items = [])
+    {
+        foreach ($items as $offset => $value)
+        {
             $this->offsetSet($offset, $value);
         }
     }
@@ -37,8 +32,9 @@ trait Accessible {
      * The return value will be casted to boolean if non-boolean was returned.
      * @since 5.0.0
      */
-    public function offsetExists($offset) : bool {
-        return array_key_exists($offset, $this->data);
+    public function offsetExists($offset): bool
+    {
+        return array_key_exists($offset, $this->items);
     }
 
     /**
@@ -50,9 +46,10 @@ trait Accessible {
      * @return mixed|static Can return all value types.
      * @since 5.0.0
      */
-    public function offsetGet($offset) {
-
-        if(!$this->offsetExists($offset)){
+    public function offsetGet($offset)
+    {
+        if(!$this->offsetExists($offset))
+        {
             $this->offsetSet($offset, $value = $this->newStatic());
             return $value;
         }
@@ -65,13 +62,14 @@ trait Accessible {
      * @param $value
      * @return static
      */
-    public function offsetSet($offset, $value){
-
-        if(is_array($value)){
+    public function offsetSet($offset, $value)
+    {
+        if(is_iterable($value))
+        {
             $value = $this->newStatic($value);
         }
 
-        $offset === null ? $this->data[] = $value : $this->data[$offset] = $value;
+        $offset === null ? $this->items[] = $value : $this->items[$offset] = $value;
 
         return $this;
     }
@@ -85,16 +83,18 @@ trait Accessible {
      * @return void
      * @since 5.0.0
      */
-    public function offsetUnset($offset) : void {
-        unset($this->data[$offset]);
+    public function offsetUnset($offset): void
+    {
+        unset($this->items[$offset]);
     }
 
     /**
-     * @param array $data
+     * @param ... $arguments
      * @return static
      */
-    protected function newStatic(iterable $data = []) : \ArrayAccess {
-        return new static($data);
+    protected function newStatic(... $arguments): \ArrayAccess
+    {
+        return new static($arguments[0]);
     }
 
 }
