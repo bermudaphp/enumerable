@@ -1,11 +1,12 @@
 <?php
 
-namespace Lobster\Arrayzy;
+namespace Bermuda\Enumerable;
 
 /**
- * @param array $data
+ * @param iterable $items
  * @return Enumerable
  */
-function collect(iterable $data = []) : Enumerable {
-    return Collect::get($data);
+function collect(iterable $items = []): Enumerable
+{
+    return new Enumerable($items)
 }
