@@ -17,7 +17,7 @@ class Enumerable implements EnumerableInterface
      */
     public function getIterator(): \Traversable
     {
-        return new \ArrayIterator($this->data);
+        return new \ArrayIterator($this->items);
     }
 
     /**
@@ -70,7 +70,7 @@ class Enumerable implements EnumerableInterface
             $value = $this->newStatic($value);
         }
 
-        $offset === null ? $this->data[] = $value : $this->data[$offset] = $value;
+        $offset === null ? $this->items[] = $value : $this->items[$offset] = $value;
 
         return $this;
     }
