@@ -134,10 +134,10 @@ class Enumerable implements EnumerableInterface
                 $arrays[] = $this->varToArray($item);
             }
             
-            return $this->newStatic(array_diff($this->data, $this->varToArray($first), ... $arrays));
+            return $this->newStatic(array_diff($this->items, $this->varToArray($first), ... $arrays));
         }
         
-        return $this->newStatic(array_diff($this->data, $this->varToArray($first)));
+        return $this->newStatic(array_diff($this->items, $this->varToArray($first)));
     }
     
     /**
@@ -250,8 +250,7 @@ class Enumerable implements EnumerableInterface
         {
             if($this->isStatic($item))
             {
-                $self = $self->merge($item->flatten()->data);
-
+                $self = $self->merge($item->flatten()->items);
                 continue;
             }
 
@@ -388,7 +387,8 @@ class Enumerable implements EnumerableInterface
 
         $sum = 0;
 
-        foreach ($filtered as $item){
+        foreach ($filtered as $item)
+        {
             $sum += $item;
         }
 
@@ -396,10 +396,10 @@ class Enumerable implements EnumerableInterface
     }
 
     /**
-     * @return float|int
+     * @return float|int|null
      */
-    public function median(){
-
+    public function median()
+    {
         $filtered = $this->filter(static function ($v)
         {
             return is_numeric($v);
@@ -425,7 +425,7 @@ class Enumerable implements EnumerableInterface
      * @param bool $preserveKeys
      * @return static
      */
-    public function chunk(int $size, bool $preserveKeys = false) : EnumerableInterface
+    public function chunk(int $size, bool $preserveKeys = false): EnumerableInterface
     {
         return $this->newStatic(array_chunk($this->items, $size, $preserveKeys));
     }
@@ -679,8 +679,7 @@ class Enumerable implements EnumerableInterface
      */
     public function slice(int $offset, int $len = null, bool $preserveKeys = false): EnumerableInterface
     {
-        $items = $this->data;
-        return $this->newStatic(array_slice($items, $offset, $len, $preserveKeys));
+        return $this->newStatic(array_slice($items = $this->items, $offset, $len, $preserveKeys));
     }
 
     /**
@@ -923,9 +922,7 @@ class Enumerable implements EnumerableInterface
      */
     public function transform(callable $callback): EnumerableInterface
     {
-        $items = $this->items;
-
-        foreach ($items as $key => $value)
+        foreach ($this->items as $key => $value)
         {
             $this->items[$key] = $callback($value, $key);
         }
@@ -940,7 +937,7 @@ class Enumerable implements EnumerableInterface
      */
     public function intersect($first, ... $other): EnumerableInterface
     {
-        return $this->newStatic(array_intersect($this->data, $array, ...$arrays));
+        return $this->newStatic(array_intersect($this->items, $first, ... $other));
     }
 
     /**
@@ -978,12 +975,7 @@ class Enumerable implements EnumerableInterface
 
             if($size)
             {
-                $self->push(
-                    $this->newStatic(
-                        array_slice($this->items, $start, $size)
-                    )
-                );
-
+                $self->push($this->newStatic(array_slice($this->items, $start, $size)));
                 $start += $size;
             }
         }
