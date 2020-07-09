@@ -340,7 +340,7 @@ class Enumerable implements EnumerableInterface
      */
     public function get($offset, $default = null) 
     {
-        return $this->data[$offset] ?? $default;
+        return $this->items[$offset] ?? $default;
     }
 
     /**
@@ -348,7 +348,7 @@ class Enumerable implements EnumerableInterface
      */
     public function isEmpty(): bool 
     {
-        return $this->data === [];
+        return $this->items === [];
     }
 
     /**
@@ -714,7 +714,7 @@ class Enumerable implements EnumerableInterface
     }
 
     /**
-     * @param array|Arrayable $data
+     * @param array|Arrayable $items
      * @return static
      */
     public function replace($items): EnumerableInterface
