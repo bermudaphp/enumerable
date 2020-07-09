@@ -140,7 +140,7 @@ interface EnumerableInterface extends Arrayable, Countable, \ArrayAccess, \Itera
     public function sum();
 
     /**
-     * @return float|int
+     * @return float|int|null
      */
     public function median();
 
