@@ -65,7 +65,7 @@ class Enumerable implements EnumerableInterface
      */
     public function offsetSet($offset, $value): EnumerableInterface 
     {
-        if(is_array($value))
+        if(\is_array($value))
         {
             $value = $this->newStatic($value);
         }
@@ -174,7 +174,7 @@ class Enumerable implements EnumerableInterface
     {
         $values = $this->varToArray($values);
         
-        if($this->count() !== count($values))
+        if($this->count() !== \count($values))
         {
             throw new \InvalidArgumentException(
                 'The number of elements in the array must 
@@ -182,7 +182,7 @@ class Enumerable implements EnumerableInterface
             );
         }
 
-        return $this->newStatic(array_combine($this->items, $values));
+        return $this->newStatic(\array_combine($this->items, $values));
     }
 
     /**
@@ -193,7 +193,7 @@ class Enumerable implements EnumerableInterface
     {
         if($limit < 0)
         {
-            return $this->slice($limit, abs($limit));
+            return $this->slice($limit, \abs($limit));
         }
 
         return $this->slice(0, $limit);
@@ -206,10 +206,10 @@ class Enumerable implements EnumerableInterface
     {
         $filtered = $this->filter(static function ($v)
         {
-            return is_numeric($v) || is_string($v);
+            return \is_numeric($v) || \is_string($v);
         });
 
-        $filtered->items = array_flip($filtered->items);
+        $filtered->items = \array_flip($filtered->items);
 
         return $filtered;
     }
@@ -377,7 +377,7 @@ class Enumerable implements EnumerableInterface
     {
         $filtered = $this->filter(static function ($v)
         {
-            return is_numeric($v);
+            return \is_numeric($v);
         });
 
         if($filtered->isEmpty())
@@ -402,7 +402,7 @@ class Enumerable implements EnumerableInterface
     {
         $filtered = $this->filter(static function ($v)
         {
-            return is_numeric($v);
+            return \is_numeric($v);
         })->sort(SORT_NUMERIC);
 
         if($filtered->isEmpty())
@@ -427,7 +427,7 @@ class Enumerable implements EnumerableInterface
      */
     public function chunk(int $size, bool $preserveKeys = false): EnumerableInterface
     {
-        return $this->newStatic(array_chunk($this->items, $size, $preserveKeys));
+        return $this->newStatic(\array_chunk($this->items, $size, $preserveKeys));
     }
 
     /**
@@ -438,10 +438,10 @@ class Enumerable implements EnumerableInterface
     {
         $filtered = $this->filter(static function ($v)
         {
-            return is_string($v) || is_numeric($v);
+            return \is_string($v) || \is_numeric($v);
         });
 
-        return implode($glue, $filtered->items);
+        return \implode($glue, $filtered->items);
     }
 
     /**
@@ -451,7 +451,7 @@ class Enumerable implements EnumerableInterface
     public function sort(int $sort_flags = SORT_REGULAR ): EnumerableInterface
     {
         $copy = clone $this;
-        sort($copy->items, $sort_flags);
+        \sort($copy->items, $sort_flags);
 
         return $copy;
     }
@@ -463,7 +463,7 @@ class Enumerable implements EnumerableInterface
     public function ksort(int $sort_flags = SORT_REGULAR ): EnumerableInterface
     {
         $copy = clone $this;
-        ksort($copy->items, $sort_flags);
+        \ksort($copy->items, $sort_flags);
 
         return $copy;
     }
@@ -475,7 +475,7 @@ class Enumerable implements EnumerableInterface
     public function krsort(int $sort_flags = SORT_REGULAR ): EnumerableInterface
     {
         $copy = clone $this;
-        krsort($copy->items, $sort_flags);
+        \krsort($copy->items, $sort_flags);
 
         return $copy;
     }
@@ -487,7 +487,7 @@ class Enumerable implements EnumerableInterface
     public function usort(callable $callback): EnumerableInterface
     {
         $copy = clone $this;
-        usort($copy->items, $callback);
+        \usort($copy->items, $callback);
 
         return $copy;
     }
@@ -499,7 +499,7 @@ class Enumerable implements EnumerableInterface
     public function uasort(callable $callback): EnumerableInterface
     {
         $copy = clone $this;
-        uasort($copy->items, $callback);
+        \uasort($copy->items, $callback);
 
         return $copy;
     }
@@ -511,7 +511,7 @@ class Enumerable implements EnumerableInterface
     public function uksort(callable $callback): EnumerableInterface
     {
         $copy = clone $this;
-        uksort($copy->items, $callback);
+        \uksort($copy->items, $callback);
 
         return $copy;
     }
@@ -523,7 +523,7 @@ class Enumerable implements EnumerableInterface
     public function rsort(int $sort_flags = SORT_REGULAR ): EnumerableInterface
     {
         $copy = clone $this;
-        rsort($copy->items, $sort_flags);
+        \rsort($copy->items, $sort_flags);
 
         return $copy;
     }
@@ -535,7 +535,7 @@ class Enumerable implements EnumerableInterface
     {
         $filtered = $this->filter(static function ($v)
         {
-            return is_numeric($v);
+            return \is_numeric($v);
         });
 
         if(($count = $filtered->count()) === 0)
@@ -559,7 +559,7 @@ class Enumerable implements EnumerableInterface
      */
     public function min()
     {
-        return min($this->items);
+        return \min($this->items);
     }
 
     /**
@@ -567,7 +567,7 @@ class Enumerable implements EnumerableInterface
      */
     public function max()
     {
-        return max($this->items);
+        return \max($this->items);
     }
 
 
@@ -595,7 +595,7 @@ class Enumerable implements EnumerableInterface
      */
     public function shift()
     {
-        return array_shift($this->items);
+        return \array_shift($this->items);
     }
 
     /**
@@ -605,12 +605,12 @@ class Enumerable implements EnumerableInterface
      */
     public function unshift($value, ... $values): EnumerableInterface
     {
-        array_unshift($values, $value);
+        \array_unshift($values, $value);
 
         foreach ($values as $value)
         {
-            !is_array($value) ?: $value = $this->newStatic($value);
-            array_unshift($this->items, $value);
+            !\is_array($value) ?: $value = $this->newStatic($value);
+            \array_unshift($this->items, $value);
         }
 
         return $this;
@@ -623,12 +623,12 @@ class Enumerable implements EnumerableInterface
      */
     public function push($value, ... $values): EnumerableInterface
     {
-        array_unshift($values, $value);
+        \array_unshift($values, $value);
 
         foreach ($values as $value)
         {
-            !is_array($value) ?: $value = $this->newStatic($value);
-            array_push($this->items, $value);
+            !\is_array($value) ?: $value = $this->newStatic($value);
+            \array_push($this->items, $value);
         }
 
         return $this;
@@ -640,7 +640,7 @@ class Enumerable implements EnumerableInterface
      */
     public function unique(int $sort_flags = SORT_STRING): EnumerableInterface
     {
-        return $this->newStatic(array_unique($this->items, $sort_flags));
+        return $this->newStatic(\array_unique($this->items, $sort_flags));
     }
 
     /**
@@ -648,7 +648,7 @@ class Enumerable implements EnumerableInterface
      */
     public function values(): EnumerableInterface
     {
-        return $this->newStatic(array_values($this->items));
+        return $this->newStatic(\array_values($this->items));
     }
 
     /**
@@ -656,7 +656,7 @@ class Enumerable implements EnumerableInterface
      */
     public function pop()
     {
-        return array_pop($this->items);
+        return \array_pop($this->items);
     }
 
     /**
@@ -679,7 +679,7 @@ class Enumerable implements EnumerableInterface
      */
     public function slice(int $offset, int $len = null, bool $preserveKeys = false): EnumerableInterface
     {
-        return $this->newStatic(array_slice($items = $this->items, $offset, $len, $preserveKeys));
+        return $this->newStatic(\array_slice($items = $this->items, $offset, $len, $preserveKeys));
     }
 
     /**
@@ -688,7 +688,7 @@ class Enumerable implements EnumerableInterface
      */
     public function reverse($preserveKeys = false): EnumerableInterface
     {
-        return $this->newStatic(array_reverse($items = $this->items, $preserveKeys));
+        return $this->newStatic(\array_reverse($items = $this->items, $preserveKeys));
     }
 
     /**
@@ -742,14 +742,14 @@ class Enumerable implements EnumerableInterface
      */
     public function only($offset, ... $offsets): EnumerableInterface
     {
-        if(is_array($offset))
+        if(\is_array($offset))
         {
             $offsets = $offset;
         } 
         
         else 
         {
-            array_unshift($offsets, $offset);
+            \array_unshift($offsets, $offset);
         }
 
         $values = $this->newStatic();
@@ -789,7 +789,7 @@ class Enumerable implements EnumerableInterface
      */
     public function keys() : EnumerableInterface
     {
-        return $this->newStatic(array_keys($this->items));
+        return $this->newStatic(\array_keys($this->items));
     }
 
     /**
@@ -798,7 +798,7 @@ class Enumerable implements EnumerableInterface
      */
     public function firstKey()
     {
-        return array_key_first($this->items);
+        return \array_key_first($this->items);
     }
 
     /**
@@ -807,7 +807,7 @@ class Enumerable implements EnumerableInterface
      */
     public function lastKey()
     {
-        return array_key_last($this->items);
+        return \array_key_last($this->items);
     }
 
     /**
@@ -817,14 +817,14 @@ class Enumerable implements EnumerableInterface
      */
     public function except($offset, ... $offsets): EnumerableInterface 
     {
-        if(is_array($offset))
+        if(\is_array($offset))
         {
             $offsets = $offset;
         } 
         
         else 
         {
-            array_unshift($offsets, $offset);
+            \array_unshift($offsets, $offset);
         }
 
         $values = clone $this;
@@ -877,12 +877,12 @@ class Enumerable implements EnumerableInterface
                 $arrays[] = $this->varToArray($item);
             }
             
-            $copy->items = array_merge($this->items, $first, ... $arrays)
+            $copy->items = \array_merge($this->items, $first, ... $arrays)
             
             return $copy;
         }        
 
-        $copy->items = array_merge($this->items, $first);
+        $copy->items = \array_merge($this->items, $first);
         
         return $copy;
     }
@@ -913,7 +913,7 @@ class Enumerable implements EnumerableInterface
      */
     public function pluck($key, $indexKey = null) : EnumerableInterface
     {
-        return $this->newStatic(array_column($this->items, $key, $indexKey));
+        return $this->newStatic(\array_column($this->items, $key, $indexKey));
     }
 
     /**
@@ -937,7 +937,7 @@ class Enumerable implements EnumerableInterface
      */
     public function intersect($first, ... $other): EnumerableInterface
     {
-        return $this->newStatic(array_intersect($this->items, $first, ... $other));
+        return $this->newStatic(\array_intersect($this->items, $first, ... $other));
     }
 
     /**
@@ -966,7 +966,7 @@ class Enumerable implements EnumerableInterface
 
         for ($i = 0; $i < $num; $i++)
         {
-            $size = (int) floor($count / $num);
+            $size = (int) \floor($count / $num);
 
             if($i < $count % $num)
             {
@@ -975,7 +975,7 @@ class Enumerable implements EnumerableInterface
 
             if($size)
             {
-                $self->push($this->newStatic(array_slice($this->items, $start, $size)));
+                $self->push($this->newStatic(\array_slice($this->items, $start, $size)));
                 $start += $size;
             }
         }
@@ -1000,7 +1000,7 @@ class Enumerable implements EnumerableInterface
             throw new \LogicException('Argument $num has to be between 1 and ' . $count);
         }
 
-        $keys = (array) array_rand($this->items, $num);
+        $keys = (array) \array_rand($this->items, $num);
 
         $values = [];
 
@@ -1024,6 +1024,6 @@ class Enumerable implements EnumerableInterface
      */
     public function reduce(callable $callback, $initial = null)
     {
-        return array_reduce($this->items, $callback, $initial);
+        return \array_reduce($this->items, $callback, $initial);
     }
 }
