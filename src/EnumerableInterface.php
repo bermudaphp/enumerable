@@ -395,7 +395,7 @@ interface EnumerableInterface extends Arrayable, Countable, \ArrayAccess, \Itera
 
     /**
      * @param int $num
-     * @return mixed|Enumerable|null
+     * @return mixed|EnumerableInterface|null
      */
     public function rand(int $num = 1);
 
