@@ -1,6 +1,6 @@
 <?php
 
-namespace Bermuda\Enumerable;
+namespace Bermuda;
 
 /**
  * @param iterable $items
