@@ -8,7 +8,7 @@ namespace Bermuda;
  */
 function collect(iterable $items = []): Enumerable
 {
-    return new Enumerable($items)
+    return new Enumerable($items);
 }
 
 /**
