@@ -4,6 +4,7 @@
 namespace Bermuda\Enumerable;
 
 
+use Bermuda\Arrayable;
 use Bermuda\Countable\Countable;
 
 
